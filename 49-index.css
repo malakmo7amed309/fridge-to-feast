@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-body: "Karla", sans-serif;
+  --color-cream: #fdf7ec;
+  --color-tomato: #d9452a;
+  --color-leaf: #2f7d4f;
+  --color-char: #241f1a;
+}
+
+html, body, #root { min-height: 100%; }
+body { font-family: var(--font-body); background: var(--color-cream); color: var(--color-char); }
+
+@keyframes rise { 0% { transform: translateY(12px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes pop { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.anim-rise { animation: rise 0.3s ease both; }
+.anim-pop { animation: pop 0.25s ease both; }
