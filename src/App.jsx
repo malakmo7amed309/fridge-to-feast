@@ -2,40 +2,49 @@ import React, { useMemo, useState } from 'react'
 
 // ---------- pantry & recipes ----------
 
+function Dot({ color, className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={'inline-block align-[-3px] ' + className} aria-hidden="true">
+      <circle cx="12" cy="12" r="10" fill={color} stroke="rgba(0,0,0,.18)" strokeWidth="1" />
+      <ellipse cx="8.5" cy="8" rx="3.5" ry="2" fill="rgba(255,255,255,.45)" transform="rotate(-30 8.5 8)" />
+    </svg>
+  )
+}
+
 const PANTRY = [
-  { id: 'rice', name: 'Rice', emoji: '🍚' },
-  { id: 'pasta', name: 'Pasta', emoji: '🍝' },
-  { id: 'lentils', name: 'Lentils', emoji: '🥣' },
-  { id: 'chickpeas', name: 'Chickpeas', emoji: '🫘' },
-  { id: 'fava', name: 'Fava beans', emoji: '🫛' },
-  { id: 'eggs', name: 'Eggs', emoji: '🥚' },
-  { id: 'chicken', name: 'Chicken', emoji: '🍗' },
-  { id: 'beef', name: 'Beef', emoji: '🥩' },
-  { id: 'potatoes', name: 'Potatoes', emoji: '🥔' },
-  { id: 'tomatoes', name: 'Tomatoes', emoji: '🍅' },
-  { id: 'onions', name: 'Onions', emoji: '🧅' },
-  { id: 'garlic', name: 'Garlic', emoji: '🧄' },
-  { id: 'eggplant', name: 'Eggplant', emoji: '🍆' },
-  { id: 'zucchini', name: 'Zucchini', emoji: '🥒' },
-  { id: 'peppers', name: 'Peppers', emoji: '🫑' },
-  { id: 'spinach', name: 'Spinach / Molokhia', emoji: '🥬' },
-  { id: 'okra', name: 'Okra (Bamia)', emoji: '🌿' },
-  { id: 'bread', name: 'Baladi bread', emoji: '🫓' },
-  { id: 'cheese', name: 'White cheese', emoji: '🧀' },
-  { id: 'butter', name: 'Butter / Ghee', emoji: '🧈' },
-  { id: 'oil', name: 'Oil', emoji: '🫗' },
-  { id: 'lemon', name: 'Lemon', emoji: '🍋' },
-  { id: 'yogurt', name: 'Yogurt', emoji: '🥛' },
-  { id: 'tahini', name: 'Tahini', emoji: '🥜' },
-  { id: 'tomato-paste', name: 'Tomato paste', emoji: '🥫' },
-  { id: 'cumin', name: 'Cumin', emoji: '🌶️' },
-  { id: 'vermicelli', name: 'Vermicelli (sha\'reya)', emoji: '🍜' },
-  { id: 'hummus-can', name: 'Canned hummus', emoji: '🫙' },
+  { id: 'rice', name: 'Rice', color: '#e8d9a8' },
+  { id: 'pasta', name: 'Pasta', color: '#e9c46a' },
+  { id: 'lentils', name: 'Lentils', color: '#c9772e' },
+  { id: 'chickpeas', name: 'Chickpeas', color: '#a0522d' },
+  { id: 'fava', name: 'Fava beans', color: '#6a994e' },
+  { id: 'eggs', name: 'Eggs', color: '#f1e3c0' },
+  { id: 'chicken', name: 'Chicken', color: '#d98e4a' },
+  { id: 'beef', name: 'Beef', color: '#b23a48' },
+  { id: 'potatoes', name: 'Potatoes', color: '#c9a066' },
+  { id: 'tomatoes', name: 'Tomatoes', color: '#d62828' },
+  { id: 'onions', name: 'Onions', color: '#b565a7' },
+  { id: 'garlic', name: 'Garlic', color: '#d9d2c0' },
+  { id: 'eggplant', name: 'Eggplant', color: '#5e3a8c' },
+  { id: 'zucchini', name: 'Zucchini', color: '#4f9d4f' },
+  { id: 'peppers', name: 'Peppers', color: '#3a9e3a' },
+  { id: 'spinach', name: 'Spinach / Molokhia', color: '#2f7d4f' },
+  { id: 'okra', name: 'Okra (Bamia)', color: '#588157' },
+  { id: 'bread', name: 'Baladi bread', color: '#d4a373' },
+  { id: 'cheese', name: 'White cheese', color: '#f4ebd0' },
+  { id: 'butter', name: 'Butter / Ghee', color: '#f2c94c' },
+  { id: 'oil', name: 'Oil', color: '#c8a415' },
+  { id: 'lemon', name: 'Lemon', color: '#f4d03f' },
+  { id: 'yogurt', name: 'Yogurt', color: '#e8eef2' },
+  { id: 'tahini', name: 'Tahini', color: '#b08968' },
+  { id: 'tomato-paste', name: 'Tomato paste', color: '#c1440e' },
+  { id: 'cumin', name: 'Cumin', color: '#c0392b' },
+  { id: 'vermicelli', name: 'Vermicelli (sha\'reya)', color: '#e0b45a' },
+  { id: 'hummus-can', name: 'Canned hummus', color: '#c2a878' },
 ]
 
 const RECIPES = [
   {
-    id: 'koshary', name: 'Koshary', emoji: '🍲', time: 50, difficulty: 'Medium', serves: 6,
+    id: 'koshary', name: 'Koshary', color: '#b5542a', time: 50, difficulty: 'Medium', serves: 6,
     desc: 'The national dish: rice, lentils and pasta topped with spiced tomato sauce, crispy onions and chickpeas.',
     needs: ['rice', 'lentils', 'pasta', 'chickpeas', 'tomatoes', 'onions', 'garlic', 'oil', 'tomato-paste', 'cumin'],
     steps: [
@@ -47,7 +56,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'ful', name: 'Ful Medames', emoji: '🫛', time: 20, difficulty: 'Easy', serves: 3,
+    id: 'ful', name: 'Ful Medames', color: '#6a994e', time: 20, difficulty: 'Easy', serves: 3,
     desc: 'Slow-cooked fava beans mashed with lemon, cumin and oil. The breakfast of Egypt.',
     needs: ['fava', 'lemon', 'garlic', 'cumin', 'oil', 'bread'],
     steps: [
@@ -57,7 +66,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'shawarma-eggs', name: 'Shakshuka', emoji: '🍳', time: 25, difficulty: 'Easy', serves: 2,
+    id: 'shawarma-eggs', name: 'Shakshuka', color: '#f2a541', time: 25, difficulty: 'Easy', serves: 2,
     desc: 'Eggs poached in a rich tomato and pepper sauce. Scoop it up with bread.',
     needs: ['eggs', 'tomatoes', 'peppers', 'onions', 'garlic', 'oil', 'cumin', 'bread'],
     steps: [
@@ -67,7 +76,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'mahshi', name: 'Mahshi (Stuffed Vegetables)', emoji: '🍆', time: 90, difficulty: 'Hard', serves: 6,
+    id: 'mahshi', name: 'Mahshi (Stuffed Vegetables)', color: '#5e3a8c', time: 90, difficulty: 'Hard', serves: 6,
     desc: 'Zucchini, eggplant and peppers stuffed with herbed rice, simmered in tomato broth. A labor of love.',
     needs: ['zucchini', 'eggplant', 'peppers', 'rice', 'tomatoes', 'onions', 'tomato-paste', 'oil'],
     steps: [
@@ -77,7 +86,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'molokhia', name: 'Molokhia with Chicken', emoji: '🥬', time: 60, difficulty: 'Medium', serves: 4,
+    id: 'molokhia', name: 'Molokhia with Chicken', color: '#2f7d4f', time: 60, difficulty: 'Medium', serves: 4,
     desc: 'Jute-leaf soup, garlicky and silky, served over rice with roasted chicken.',
     needs: ['spinach', 'chicken', 'garlic', 'butter', 'rice'],
     steps: [
@@ -88,7 +97,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'bamia', name: 'Bamia (Okra Stew)', emoji: '🌿', time: 45, difficulty: 'Easy', serves: 4,
+    id: 'bamia', name: 'Bamia (Okra Stew)', color: '#588157', time: 45, difficulty: 'Easy', serves: 4,
     desc: 'Tender okra in a garlicky tomato stew, great over rice.',
     needs: ['okra', 'tomatoes', 'garlic', 'onions', 'tomato-paste', 'oil', 'rice'],
     steps: [
@@ -98,7 +107,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'fattah', name: 'Fattah', emoji: '🍚', time: 70, difficulty: 'Hard', serves: 6,
+    id: 'fattah', name: 'Fattah', color: '#e8d9a8', time: 70, difficulty: 'Hard', serves: 6,
     desc: 'Feast food: crispy bread, rice and beef under a garlic-vinegar tomato sauce.',
     needs: ['beef', 'rice', 'bread', 'garlic', 'tomato-paste', 'butter'],
     steps: [
@@ -108,7 +117,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'macarona-bechamel', name: 'Macarona Bechamel', emoji: '🍝', time: 60, difficulty: 'Medium', serves: 6,
+    id: 'macarona-bechamel', name: 'Macarona Bechamel', color: '#e9c46a', time: 60, difficulty: 'Medium', serves: 6,
     desc: 'Egyptian baked pasta: penne, spiced beef and creamy bechamel, golden on top.',
     needs: ['pasta', 'beef', 'butter', 'yogurt', 'onions', 'tomato-paste', 'eggs'],
     steps: [
@@ -118,7 +127,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'torshi-potatoes', name: 'Batates m\'aamar (Oven Potatoes)', emoji: '🥔', time: 55, difficulty: 'Easy', serves: 4,
+    id: 'torshi-potatoes', name: 'Batates m\'aamar (Oven Potatoes)', color: '#c9a066', time: 55, difficulty: 'Easy', serves: 4,
     desc: 'Crispy roasted potato wedges with garlic and cumin.',
     needs: ['potatoes', 'garlic', 'oil', 'cumin', 'lemon'],
     steps: [
@@ -128,7 +137,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'eggplant-mesaqqa', name: 'Mesa\'a\'a (Eggplant Casserole)', emoji: '🍆', time: 50, difficulty: 'Medium', serves: 4,
+    id: 'eggplant-mesaqqa', name: 'Mesa\'a\'a (Eggplant Casserole)', color: '#5e3a8c', time: 50, difficulty: 'Medium', serves: 4,
     desc: 'Fried eggplant layered with tomato sauce and peppers, baked until it melts.',
     needs: ['eggplant', 'tomatoes', 'peppers', 'garlic', 'oil', 'tomato-paste'],
     steps: [
@@ -138,7 +147,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'taameya', name: 'Ta\'ameya (Egyptian Falafel)', emoji: '🧆', time: 40, difficulty: 'Medium', serves: 4,
+    id: 'taameya', name: 'Ta\'ameya (Egyptian Falafel)', color: '#8a5a2b', time: 40, difficulty: 'Medium', serves: 4,
     desc: 'Fava-bean falafel, green inside from herbs, sesame on top.',
     needs: ['fava', 'onions', 'garlic', 'spinach', 'cumin', 'oil', 'bread'],
     steps: [
@@ -148,7 +157,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'roz-belabn', name: 'Roz Bel Laban (Rice Pudding)', emoji: '🍮', time: 40, difficulty: 'Easy', serves: 4,
+    id: 'roz-belabn', name: 'Roz Bel Laban (Rice Pudding)', color: '#e9b872', time: 40, difficulty: 'Easy', serves: 4,
     desc: 'Egyptian rice pudding: creamy, simple, best cold.',
     needs: ['rice', 'yogurt', 'butter'],
     steps: [
@@ -158,7 +167,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'kebda', name: 'Kebda Eskandarani (Alexandria Liver)', emoji: '🥩', time: 25, difficulty: 'Easy', serves: 3,
+    id: 'kebda', name: 'Kebda Eskandarani (Alexandria Liver)', color: '#b23a48', time: 25, difficulty: 'Easy', serves: 3,
     desc: 'Sizzling beef strips with garlic, peppers and cumin - street-cart style.',
     needs: ['beef', 'peppers', 'garlic', 'cumin', 'oil', 'lemon', 'bread'],
     steps: [
@@ -168,7 +177,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'chicken-pane', name: 'Chicken Pane', emoji: '🍗', time: 35, difficulty: 'Easy', serves: 3,
+    id: 'chicken-pane', name: 'Chicken Pane', color: '#d98e4a', time: 35, difficulty: 'Easy', serves: 3,
     desc: 'Crispy breaded chicken, the Friday-table classic.',
     needs: ['chicken', 'eggs', 'bread', 'oil', 'lemon', 'garlic'],
     steps: [
@@ -178,7 +187,7 @@ const RECIPES = [
     ],
   },
   {
-    id: 'halawet-sha\'reya', name: 'Sha\'reya (Sweet Vermicelli)', emoji: '🍜', time: 20, difficulty: 'Easy', serves: 4,
+    id: 'halawet-sha\'reya', name: 'Sha\'reya (Sweet Vermicelli)', color: '#e0b45a', time: 20, difficulty: 'Easy', serves: 4,
     desc: 'Golden toasted vermicelli in syrup with nuts - the quick family dessert.',
     needs: ['vermicelli', 'butter'],
     steps: [
@@ -245,7 +254,7 @@ export default function App() {
                 on ? 'border-leaf bg-leaf text-white shadow-sm' : 'border-char/10 bg-white text-char/60 hover:border-leaf/50'
               }`}
             >
-              {p.emoji} {p.name}
+              <Dot color={p.color} className="mr-1.5 h-4 w-4" /> {p.name}
             </button>
           )
         })}
@@ -272,7 +281,7 @@ export default function App() {
           <div key={r.id} className={`anim-rise overflow-hidden rounded-3xl bg-white shadow-sm ring-1 transition ${r.missing.length === 0 ? 'ring-leaf/40' : 'ring-char/5'}`}>
             <button onClick={() => setOpen(open === r.id ? null : r.id)} className="w-full p-5 text-left">
               <div className="flex items-start gap-3">
-                <div className="text-4xl">{r.emoji}</div>
+                <div className="mb-1"><Dot color={r.color} className="h-11 w-11" /></div>
                 <div className="min-w-0 flex-1">
                   <div className="font-display text-xl font-bold leading-tight">{r.name}</div>
                   <div className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-char/40">
@@ -280,7 +289,7 @@ export default function App() {
                   </div>
                 </div>
                 {r.missing.length === 0 ? (
-                  <span className="rounded-full bg-leaf px-3 py-1 text-xs font-bold text-white">Ready ✓</span>
+                  <span className="rounded-full bg-leaf px-3 py-1 text-xs font-bold text-white">Ready <svg viewBox="0 0 24 24" className="inline h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12l5 5L20 6" /></svg></span>
                 ) : (
                   <span className="rounded-full bg-tomato/10 px-3 py-1 text-xs font-bold text-tomato">missing {r.missing.length}</span>
                 )}
@@ -308,7 +317,7 @@ export default function App() {
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {r.needs.map((n) => (
                     <span key={n} className={`rounded-full px-2 py-0.5 text-xs font-semibold ${have.includes(n) ? 'bg-leaf/10 text-leaf' : 'bg-tomato/10 text-tomato'}`}>
-                      {pantryItem(n)?.emoji} {pantryItem(n)?.name}
+                      <Dot color={pantryItem(n)?.color} className="mr-1 h-3.5 w-3.5" /> {pantryItem(n)?.name}
                     </span>
                   ))}
                 </div>
